@@ -161,8 +161,28 @@ print(names(msdata))
 #      with the average of each variable for each activity and each subject.
 #  Use: tbl_df() to create the class needed for dplyr tools
 #  Use: group_by() to set up the categories for each subject and activity
-#  Use:            to compute the averages
-#  Use: 
+#  Use: mean() to compute the averages
+#  Use: ** can't find a better way than just writing it all out
 msdata_df<-tbl_df(msdata)
-groupmsdata <- group_by(msdata_df,subject,activity)
-summarize(groupmsdata,Average_tBodyGyroMagMean = mean(tBodyGyroMagMean))
+msdata_df <- group_by(msdata_df,subject,activity) 
+msdata_df2<-summarize(msdata_df,Average_tBodyAccMagMean = mean(tBodyAccMagMean), #2
+          Average_tBodyAccMagStd = mean(tBodyAccMagStd),                         #3
+          Average_tGravityAccMagMean = mean(tGravityAccMagMean),                 #4
+          Average_tGravityAccMagStd = mean(tGravityAccMagStd),                   #5
+          Average_tBodyAccJerkMagMean = mean(tBodyAccJerkMagMean),             #6
+          Average_tBodyAccJerkMagStd = mean(tBodyAccJerkMagStd),               #7
+          Average_tBodyGyroMagMean = mean(tBodyGyroMagMean),                     #8
+          Average_tBodyGyroMagStd = mean(tBodyGyroMagStd),                       #9
+          Average_tBodyGyroJerkMagMean = mean(tBodyGyroJerkMagMean),             #10
+          Average_tBodyGyroJerkMagStd = mean(tBodyGyroJerkMagStd),               #11
+          Average_fBodyAccMagMean = mean(fBodyAccMagMean),                       #12
+          Average_fBodyAccMagStd = mean(fBodyAccMagStd),                         #13
+          Average_fBodyBodyAccJerkMagMean = mean(fBodyBodyAccJerkMagMean),             #14
+          Average_fBodyBodyAccJerkMagStd = mean(fBodyBodyAccJerkMagStd),               #15
+          Average_fBodyGyroMagMean = mean(fBodyBodyGyroMagMean),                     #16
+          Average_fBodyBodyGyroMagStd = mean(fBodyBodyGyroMagStd),                       #17
+          Average_fBodyBodyGyroJerkMagMean = mean(fBodyBodyGyroJerkMagMean),             #18
+          Average_fBodyBodyGyroJerkMagStd = mean(fBodyBodyGyroJerkMagStd)               #19          
+          ) 
+print(msdata_df2)
+write.table(msdata_df2,"TidyData.txt", row.name=FALSE)
