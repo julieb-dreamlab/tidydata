@@ -160,4 +160,9 @@ print(names(msdata))
 # 5. From the data set in step 4, creates a second, independent tidy data set 
 #      with the average of each variable for each activity and each subject.
 #  Use: tbl_df() to create the class needed for dplyr tools
+#  Use: group_by() to set up the categories for each subject and activity
+#  Use:            to compute the averages
+#  Use: 
 msdata_df<-tbl_df(msdata)
+groupmsdata <- group_by(msdata_df,subject,activity)
+summarize(groupmsdata,Average_tBodyGyroMagMean = mean(tBodyGyroMagMean))
